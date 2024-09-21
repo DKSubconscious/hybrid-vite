@@ -1,17 +1,24 @@
-import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
-
-import { resolve } from 'path'
+// node
+import { fileURLToPath, URL } from 'node:url';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+// vite
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueDevTools from 'vite-plugin-vue-devtools';
+// plugins
+import customPageRoutePlugin from './plugins/vite-plugin-page-routes.js';
+import customStaticPageRoutePlugin from './plugins/vite-plugin-static-page-routes.js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+    customPageRoutePlugin(),
+    customStaticPageRoutePlugin(),
   ],
+
   build: {
     rollupOptions: {
       input: {
@@ -20,11 +27,13 @@ export default defineConfig({
       },
     },
   },
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+
   server: {
     historyApiFallback: {
       rewrites: [
@@ -33,4 +42,5 @@ export default defineConfig({
       ],
     },
   },
+
 })
