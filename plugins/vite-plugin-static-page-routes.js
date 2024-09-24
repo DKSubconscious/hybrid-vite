@@ -15,6 +15,12 @@ export default function customPageRoutePlugin () {
         const spaRoutes = [{
           index: '/',
           indexFull: 'index.html'
+        }, {
+          index: '/eggs',
+          indexFull: 'eggs.html'
+        }, {
+          index: '/contact',
+          indexFull: 'contact.html'
         }];
 
         // Remove query parameters and hash fragments from the URL
